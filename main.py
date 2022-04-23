@@ -1,4 +1,4 @@
-from .insta.instagram import Instagram
+from .instagram import Instagram
 
 insta = Instagram()
 
