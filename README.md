@@ -1,4 +1,6 @@
 # Instagram-Tools
 
--- pip install requests  --
--- pip install beautifulsoup4 --
+install
+--------
+* pip install requests 
+* pip install beautifulsoup4 
