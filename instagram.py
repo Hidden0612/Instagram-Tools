@@ -57,7 +57,7 @@ class Instagram:
             session_info = f"[+] Successful\ncsrf_token: , {__cookie['csrftoken']}\nsession_id: {__cookie['sessionid']}"
             with open(f"session_{username}.json", "w") as f:
                 f.write(json.dumps(__cookie, indent=4))
-            raise session_info
+            print(session_info)
         else:
             raise Exception(login_response.text)
 
