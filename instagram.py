@@ -22,8 +22,6 @@ class Instagram:
             return "[-] Session file not found ...!"
         except Exception as ee:
             return f"[-] Error : {ee}"
-        else:
-            return "[+] Successful session loading ...  "
 
     def login(self, username: str, password: str) -> str:
         """ Account Login """
@@ -93,4 +91,5 @@ class Instagram:
                 with open(f"{user}/information_{user}.json", "w") as f:
                     __json_write = __json_data["entry_data"]["ProfilePage"][0]["graphql"]["user"]
                     f.write(json.dumps(__json_write, indent=4))
+                return data
 
