@@ -1,6 +1,6 @@
-from .instagram import Instagram
+import instagram
 
-insta = Instagram()
+insta = instagram.Instagram()
 
 USERNAME = ""
 PASSWORD = ""
