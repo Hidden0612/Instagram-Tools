@@ -21,16 +21,18 @@ class Instagram:
         except FileNotFoundError:
             raise FileNotFoundError("[-] Session file not found ...!")
 
-    def login(self, username: str, password: str) -> None:
-        """ Account Login """
+    def check_session_exists(self, username : str):
         # check the session file exists
         try:
             session_file = f"session_{username}.json"
             self.load(session_file)
-            return
+            return True
         except FileNotFoundError:
-            # do nothing and make a new session 
-            pass
+            return False
+        
+    
+    def login(self, username: str, password: str) -> None:
+        """ Account Login """
 
         link = 'https://www.instagram.com/accounts/login/'
         login_url = 'https://www.instagram.com/accounts/login/ajax/'

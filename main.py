@@ -1,12 +1,19 @@
 import instagram
 
-insta = instagram.Instagram()
+def main():
+    insta = instagram.Instagram()
 
-USERNAME = ""
-PASSWORD = ""
+    USERNAME = ""
+    PASSWORD = ""
 
-insta.login(USERNAME, PASSWORD) # Or Load File Session
+    #  load the session
+    if not insta.check_session_exists(USERNAME):
+        # login
+        insta.login(USERNAME, PASSWORD)
+    info = insta.user_information("instagram")
 
-info = insta.user_information("Hidden0612")
+    print(info)
 
-print(info)
+
+if __name__ == "__main__":
+    main()
