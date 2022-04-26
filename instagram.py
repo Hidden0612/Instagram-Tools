@@ -77,6 +77,10 @@ class Instagram:
         }
         url = f'https://www.instagram.com/{user}/'
         response = requests.get(url, headers=header, cookies=self.session)
+        # check invalid username
+        if(response.status_code == 404):
+            raise Exception("target username not found !")
+        
         suop = BeautifulSoup(response.content, "html.parser")
         for info in suop.find_all("script", {"type": "text/javascript"}):
             if (info.get_text()).startswith("window._sharedData = "):
