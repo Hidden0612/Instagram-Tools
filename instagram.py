@@ -19,12 +19,21 @@ class Instagram:
             with open(session, "r") as f:
                 self.session = json.load(f)
         except FileNotFoundError:
-            return "[-] Session file not found ...!"
-        except Exception as ee:
-            return f"[-] Error : {ee}"
+            raise FileNotFoundError("[-] Session file not found ...!")
 
-    def login(self, username: str, password: str) -> str:
+    def check_session_exists(self, username : str):
+        # check the session file exists
+        try:
+            session_file = f"session_{username}.json"
+            self.load(session_file)
+            return True
+        except FileNotFoundError:
+            return False
+        
+    
+    def login(self, username: str, password: str) -> None:
         """ Account Login """
+
         link = 'https://www.instagram.com/accounts/login/'
         login_url = 'https://www.instagram.com/accounts/login/ajax/'
 
@@ -68,6 +77,10 @@ class Instagram:
         }
         url = f'https://www.instagram.com/{user}/'
         response = requests.get(url, headers=header, cookies=self.session)
+        # check invalid username
+        if(response.status_code == 404):
+            raise Exception("target username not found !")
+        
         suop = BeautifulSoup(response.content, "html.parser")
         for info in suop.find_all("script", {"type": "text/javascript"}):
             if (info.get_text()).startswith("window._sharedData = "):
